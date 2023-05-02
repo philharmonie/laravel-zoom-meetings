@@ -1,12 +1,12 @@
 <?php
 
-namespace VendorName\Skeleton\Commands;
+namespace Philharmonie\LaravelZoomMeetings\Commands;
 
 use Illuminate\Console\Command;
 
-class SkeletonCommand extends Command
+class LaravelZoomMeetingsCommand extends Command
 {
-    public $signature = 'skeleton';
+    public $signature = 'laravel-zoom-meetings';
 
     public $description = 'My command';
 
