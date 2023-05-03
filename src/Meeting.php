@@ -2,6 +2,7 @@
 
 namespace Philharmonie\LaravelZoomMeetings;
 
+use Philharmonie\LaravelZoomMeetings\Exceptions\HttpException;
 use Philharmonie\LaravelZoomMeetings\Support\Client;
 
 class Meeting
@@ -18,9 +19,13 @@ class Meeting
     /**
      * @throws Exceptions\HttpException
      */
-    public function create(string $email, array $data): array
+    public function create(array $data, string|null $userId = null): array
     {
-        return Client::post('users/'.urlencode($email).'/meetings', $data, self::$access_token);
+        if (! $userId) {
+            $userId = 'me';
+        }
+
+        return Client::post('users/'.urlencode($userId).'/meetings', $data, self::$access_token);
     }
 
     /**
@@ -29,5 +34,26 @@ class Meeting
     public function delete(int $id): array
     {
         return Client::delete('meetings/'.$id, self::$access_token);
+    }
+
+    /**
+     * @throws HttpException
+     */
+    public function findBy(string $field, string $value, string $userId = null): array
+    {
+        if (! $userId) {
+            $userId = 'me';
+        }
+
+        $meetings = Client::get('users/'.urlencode($userId).'/meetings', self::$access_token);
+
+        foreach ($meetings['body']['meetings'] as $meeting) {
+            if ($meeting[$field] === $value) {
+
+                return $meeting;
+            }
+        }
+
+        return [];
     }
 }

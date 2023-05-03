@@ -46,12 +46,12 @@ Save the Account ID, Client ID and Client Secret in your `.env` file.
 ```php
 $access_token = Auth::getToken();
 
-$meeting = Meeting::setAccessToken($access_token)->create('mail@example.com', [
+$meeting = Meeting::setAccessToken($access_token)->create([
     'topic' => 'Test Meeting',
     'type' => 2,
     'start_time' => now()->addDay()->startOfHour()->format('Y-m-d\TH:i:s'),
     'duration' => 60,
-]);
+], 'mail@example.com');
 ```
 
 See the test cases for more usage examples.
