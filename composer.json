@@ -17,8 +17,9 @@
     ],
     "require": {
         "php": "^8.1",
-        "spatie/laravel-package-tools": "^1.14.0",
-        "illuminate/contracts": "^10.0"
+        "guzzlehttp/guzzle": "^7.5",
+        "illuminate/contracts": "^10.0",
+        "spatie/laravel-package-tools": "^1.14.0"
     },
     "require-dev": {
         "laravel/pint": "^1.0",
@@ -30,8 +31,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Philharmonie\\LaravelZoomMeetings\\": "src/",
-            "Philharmonie\\LaravelZoomMeetings\\Database\\Factories\\": "database/factories/"
+            "Philharmonie\\LaravelZoomMeetings\\": "src/"
         }
     },
     "autoload-dev": {
@@ -40,10 +40,7 @@
         }
     },
     "scripts": {
-        "post-autoload-dump": "@php ./vendor/bin/testbench package:discover --ansi",
-        "analyse": "vendor/bin/phpstan analyse",
         "test": "vendor/bin/pest",
-        "test-coverage": "vendor/bin/pest --coverage",
         "format": "vendor/bin/pint"
     },
     "config": {

@@ -4,7 +4,6 @@ namespace Philharmonie\LaravelZoomMeetings;
 
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Philharmonie\LaravelZoomMeetings\Commands\LaravelZoomMeetingsCommand;
 
 class LaravelZoomMeetingsServiceProvider extends PackageServiceProvider
 {
@@ -17,9 +16,6 @@ class LaravelZoomMeetingsServiceProvider extends PackageServiceProvider
          */
         $package
             ->name('laravel-zoom-meetings')
-            ->hasConfigFile()
-            ->hasViews()
-            ->hasMigration('create_laravel-zoom-meetings_table')
-            ->hasCommand(LaravelZoomMeetingsCommand::class);
+            ->hasConfigFile();
     }
 }
