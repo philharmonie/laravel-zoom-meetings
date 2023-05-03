@@ -18,7 +18,7 @@ composer require philharmonie/laravel-zoom-meetings
 You can publish the config file with:
 
 ```bash
-php artisan vendor:publish --tag="laravel-zoom-meetings-config"
+php artisan vendor:publish --tag="zoom-meetings-config"
 ```
 
 This is the contents of the published config file:
