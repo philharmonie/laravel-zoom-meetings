@@ -5,15 +5,7 @@
 [![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/philharmonie/laravel-zoom-meetings/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/philharmonie/laravel-zoom-meetings/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/philharmonie/laravel-zoom-meetings.svg?style=flat-square)](https://packagist.org/packages/philharmonie/laravel-zoom-meetings)
 
-This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
-
-## Support us
-
-[<img src="https://github-ads.s3.eu-central-1.amazonaws.com/laravel-zoom-meetings.jpg?t=1" width="419px" />](https://spatie.be/github-ad-click/laravel-zoom-meetings)
-
-We invest a lot of resources into creating [best in class open source packages](https://spatie.be/open-source). You can support us by [buying one of our paid products](https://spatie.be/open-source/support-us).
-
-We highly appreciate you sending us a postcard from your hometown, mentioning which of our package(s) you are using. You'll find our address on [our contact page](https://spatie.be/about-us). We publish all received postcards on [our virtual postcard wall](https://spatie.be/open-source/postcards).
+With this package you can create Zoom meetings from your Laravel application using Server-To-Server OAuth.
 
 ## Installation
 
@@ -21,13 +13,6 @@ You can install the package via composer:
 
 ```bash
 composer require philharmonie/laravel-zoom-meetings
-```
-
-You can publish and run the migrations with:
-
-```bash
-php artisan vendor:publish --tag="laravel-zoom-meetings-migrations"
-php artisan migrate
 ```
 
 You can publish the config file with:
@@ -40,23 +25,52 @@ This is the contents of the published config file:
 
 ```php
 return [
+    'account_id' => env('ZOOM_ACCOUNT_ID'),
+    'client_id' => env('ZOOM_CLIENT_ID'),
+    'client_secret' => env('ZOOM_CLIENT_SECRET'),
+    'base_url' => 'https://api.zoom.us/v2/',
+    'token_url' => 'https://zoom.us/oauth/token',
 ];
 ```
 
-Optionally, you can publish the views using
+## Preparing your Zoom account
 
-```bash
-php artisan vendor:publish --tag="laravel-zoom-meetings-views"
-```
+Create a Server-to-Server OAuth app in your Zoom account following this
+instruction: https://developers.zoom.us/docs/internal-apps/create/.
+You will need the `user:read:admin meeting:write:admin` scopes.
+
+Save the Account ID, Client ID and Client Secret in your `.env` file.
 
 ## Usage
 
 ```php
-$laravelZoomMeetings = new Philharmonie\LaravelZoomMeetings();
-echo $laravelZoomMeetings->echoPhrase('Hello, Philharmonie!');
+$access_token = Auth::getToken();
+
+$meeting = Meeting::setAccessToken($access_token)->create('mail@example.com', [
+    'topic' => 'Test Meeting',
+    'type' => 2,
+    'start_time' => now()->addDay()->startOfHour()->format('Y-m-d\TH:i:s'),
+    'duration' => 60,
+]);
 ```
 
+See the test cases for more usage examples.
+
 ## Testing
+
+Update the phpunit.xml file with your Zoom API credentials.
+
+```xml
+
+<php>
+    <env name="ZOOM_ACCOUNT_ID" value=""/>
+    <env name="ZOOM_CLIENT_ID" value=""/>
+    <env name="ZOOM_CLIENT_SECRET" value=""/>
+    <env name="ZOOM_EMAIL_ACCOUNT" value=""/>
+</php>
+```
+
+Run
 
 ```bash
 composer test
@@ -72,12 +86,11 @@ Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 
 ## Security Vulnerabilities
 
-Please review [our security policy](../../security/policy) on how to report security vulnerabilities.
+If you discover any security-related issues, please email phil@harmonie.media instead of using the issue tracker.
 
 ## Credits
 
 - [Phil Harmonie](https://github.com/philharmonie)
-- [All Contributors](../../contributors)
 
 ## License
 
