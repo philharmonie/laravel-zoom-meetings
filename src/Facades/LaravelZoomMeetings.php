@@ -10,8 +10,10 @@ use Philharmonie\LaravelZoomMeetings\Meeting;
  */
 class LaravelZoomMeetings extends Facade
 {
+    // @codeCoverageIgnoreStart
     protected static function getFacadeAccessor(): string
     {
         return Meeting::class;
     }
+    // @codeCoverageIgnoreEnd
 }
