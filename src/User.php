@@ -27,8 +27,12 @@ class User
     /**
      * @throws HttpException
      */
-    public static function find(string $email): array
+    public static function find(string|null $email = null): array
     {
+        if (! $email) {
+            $email = 'me';
+        }
+
         return Client::get('users/'.urlencode($email), self::$access_token);
     }
 
@@ -38,5 +42,17 @@ class User
     public function me(): array
     {
         return Client::get('users/me', self::$access_token);
+    }
+
+    /**
+     * @throws HttpException
+     */
+    public static function meetings(string|null $email = null): array
+    {
+        if (! $email) {
+            $email = 'me';
+        }
+
+        return Client::get('users/'.urlencode($email).'/meetings', self::$access_token);
     }
 }

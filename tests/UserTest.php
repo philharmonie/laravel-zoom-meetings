@@ -23,7 +23,17 @@ it('can get all users', function () {
 
 it('can get user by email address', function () {
     $access_token = Auth::getToken();
-    $user = User::setAccessToken($access_token)->find(env('ZOOM_EMAIL_ACCOUNT'));
+    $user = User::setAccessToken($access_token)->find(config('zoom.email_account'));
 
     expect($user['status'])->toBe(200);
+});
+
+it('can get user\'s meetings', function () {
+    $access_token = Auth::getToken();
+    $user = User::setAccessToken($access_token)->find(config('zoom.email_account'));
+
+    $meetings = User::setAccessToken($access_token)->meetings($user['body']['email']);
+
+    expect($meetings['status'])->toBe(200);
+
 });
