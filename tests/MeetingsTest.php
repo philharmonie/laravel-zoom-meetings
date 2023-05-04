@@ -31,7 +31,7 @@ it('can create a meeting for the user', function () {
         'type' => 2,
         'start_time' => now()->addDay()->startOfHour()->format('Y-m-d\TH:i:s'),
         'duration' => 60,
-    ], env('ZOOM_EMAIL_ACCOUNT'));
+    ], config('zoom.email_account'));
 
     expect($meeting['status'])->toBe(201);
 

@@ -58,7 +58,11 @@ See the test cases for more usage examples.
 
 ## Testing
 
-Update the phpunit.xml file with your Zoom API credentials.
+```bash
+cp phpunit.xml.dist phpunit.xml
+```
+
+Update the environment variables in `phpunit.xml`:
 
 ```xml
 
