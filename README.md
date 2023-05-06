@@ -1,6 +1,6 @@
 # Create Zoom Meetings
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/philharmonie/laravel-zoom-meetings.svg?style=flat-square)](https://packagist.org/packages/philharmonie/laravel-zoom-meetings)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/philharmonie/laravel-zoom-meetings.svg?style=flat-square&include_prereleases)](https://packagist.org/packages/philharmonie/laravel-zoom-meetings)
 [![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/philharmonie/laravel-zoom-meetings/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/philharmonie/laravel-zoom-meetings/actions?query=workflow%3Arun-tests+branch%3Amain)
 [![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/philharmonie/laravel-zoom-meetings/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/philharmonie/laravel-zoom-meetings/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/philharmonie/laravel-zoom-meetings.svg?style=flat-square)](https://packagist.org/packages/philharmonie/laravel-zoom-meetings)
