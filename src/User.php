@@ -3,6 +3,7 @@
 namespace Philharmonie\LaravelZoomMeetings;
 
 use Philharmonie\LaravelZoomMeetings\Exceptions\HttpException;
+use Philharmonie\LaravelZoomMeetings\Exceptions\InvalidAccessTokenException;
 use Philharmonie\LaravelZoomMeetings\Support\Client;
 
 class User
@@ -18,6 +19,7 @@ class User
 
     /**
      * @throws HttpException
+     * @throws InvalidAccessTokenException
      */
     public static function all(): array
     {
@@ -26,6 +28,7 @@ class User
 
     /**
      * @throws HttpException
+     * @throws InvalidAccessTokenException
      */
     public static function find(string|null $email = null): array
     {
@@ -38,6 +41,7 @@ class User
 
     /**
      * @throws HttpException
+     * @throws InvalidAccessTokenException
      */
     public function me(): array
     {
@@ -46,6 +50,7 @@ class User
 
     /**
      * @throws HttpException
+     * @throws InvalidAccessTokenException
      */
     public static function meetings(string|null $email = null): array
     {

@@ -2,8 +2,11 @@
 
 namespace Philharmonie\LaravelZoomMeetings\Support;
 
+use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Http;
 use Philharmonie\LaravelZoomMeetings\Exceptions\HttpException;
+use Philharmonie\LaravelZoomMeetings\Exceptions\InvalidAccessTokenException;
+use Symfony\Component\HttpFoundation\Response as BaseResponse;
 
 class Client
 {
@@ -17,6 +20,7 @@ class Client
 
     /**
      * @throws httpexception
+     * @throws InvalidAccessTokenException
      */
     public static function get(string $uri, string $access_token): array
     {
@@ -28,6 +32,7 @@ class Client
 
     /**
      * @throws httpexception
+     * @throws InvalidAccessTokenException
      */
     public static function post(string $uri, array $data, string $access_token): array
     {
@@ -39,6 +44,7 @@ class Client
 
     /**
      * @throws HttpException
+     * @throws InvalidAccessTokenException
      */
     public static function delete(string $uri, string $access_token): array
     {
@@ -50,17 +56,22 @@ class Client
 
     /**
      * @throws HttpException
+     * @throws InvalidAccessTokenException
      */
-    private static function handleResponse($response, $uri): array
+    private static function handleResponse(Response $response, $uri): array
     {
         if ($response->failed()) {
-            $message = $response->json('error_message', 'unknown error');
+            if ($response->status() === BaseResponse::HTTP_UNAUTHORIZED) {
+                throw new InvalidAccessTokenException($response->body());
+            }
+
+            $message = $response->json('error_message', 'Unknown error');
             throw HttpException::new($uri, $response->status(), $message, $response->json());
         }
 
         return [
             'status' => $response->status(),
-            'body' => json_decode($response->getbody(), true),
+            'body' => json_decode($response->body(), true),
         ];
     }
 }

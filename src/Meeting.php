@@ -3,6 +3,7 @@
 namespace Philharmonie\LaravelZoomMeetings;
 
 use Philharmonie\LaravelZoomMeetings\Exceptions\HttpException;
+use Philharmonie\LaravelZoomMeetings\Exceptions\InvalidAccessTokenException;
 use Philharmonie\LaravelZoomMeetings\Support\Client;
 
 class Meeting
@@ -18,6 +19,7 @@ class Meeting
 
     /**
      * @throws Exceptions\HttpException
+     * @throws InvalidAccessTokenException
      */
     public function create(array $data, string|null $userId = null): array
     {
@@ -30,6 +32,7 @@ class Meeting
 
     /**
      * @throws Exceptions\HttpException
+     * @throws InvalidAccessTokenException
      */
     public function delete(int $id): array
     {
@@ -38,6 +41,7 @@ class Meeting
 
     /**
      * @throws HttpException
+     * @throws InvalidAccessTokenException
      */
     public function findBy(string $field, string $value, string $userId = null): array
     {

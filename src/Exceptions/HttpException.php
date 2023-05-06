@@ -8,7 +8,7 @@ use Throwable;
 class HttpException extends Exception
 {
     // @codeCoverageIgnoreStart
-    public function __construct(private $response, $message = '', $code = 0, Throwable $previous = null)
+    public function __construct($message = '', $code = 0, Throwable $previous = null)
     {
         parent::__construct($message, $code, $previous);
     }
@@ -22,11 +22,6 @@ class HttpException extends Exception
                 $url, $status, $message
             )
         );
-    }
-
-    public function getResponse()
-    {
-        return $this->response;
     }
     // @codeCoverageIgnoreEnd
 }
