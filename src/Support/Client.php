@@ -24,8 +24,10 @@ class Client
      */
     public static function get(string $uri, string $access_token): array
     {
-        $response = http::withHeaders(self::requestHeaders($access_token))
-            ->get(config('zoom-meetings.base_url').$uri);
+        $response = Http::withHeaders(self::requestHeaders($access_token))
+            ->get(config('zoom-meetings.base_url').$uri, [
+                'page_size' => 300,
+            ]);
 
         return self::handleResponse($response, $uri);
     }
