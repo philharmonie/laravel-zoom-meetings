@@ -10,15 +10,15 @@ class Meeting
 {
     protected static string $access_token;
 
-    public static function setAccessToken(string $access_token): meeting
+    public static function setAccessToken(string $access_token): self
     {
         self::$access_token = $access_token;
 
-        return new meeting();
+        return new self();
     }
 
     /**
-     * @throws Exceptions\HttpException
+     * @throws HttpException
      * @throws InvalidAccessTokenException
      */
     public function create(array $data, string|null $userId = null): array
@@ -31,7 +31,16 @@ class Meeting
     }
 
     /**
-     * @throws Exceptions\HttpException
+     * @throws HttpException
+     * @throws InvalidAccessTokenException
+     */
+    public function get(int|string $meetingId): array
+    {
+        return Client::get('meetings/'.$meetingId, self::$access_token);
+    }
+
+    /**
+     * @throws HttpException
      * @throws InvalidAccessTokenException
      */
     public function delete(int $id): array
@@ -53,7 +62,6 @@ class Meeting
 
         foreach ($meetings['body']['meetings'] as $meeting) {
             if ($meeting[$field] === $value) {
-
                 return $meeting;
             }
         }
